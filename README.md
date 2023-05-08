@@ -25,7 +25,7 @@
 
 위와 같은 기능을 갖춘 음악 관리 프로그램은 음악을 체계적으로 정리하고 플레이리스트를 편리하게 관리할 수 있는 도구가 됩니다. 프로그램을 사용하여 음악을 즐기는 동시에 효율적으로 관리할 수 있습니다.
 <div align="center">
-<img src=https://user-images.githubusercontent.com/130717706/236621199-6de05856-cbc0-419b-8c86-80397ad1fbae.png>
+<img src=https://user-images.githubusercontent.com/130717706/236788474-e0dd2f20-8be0-4606-98ca-be6f7d1583b8.png>
 </div>
 
 ## 🍉project 에 포함시킬 기능 설명
