@@ -50,5 +50,7 @@
 <역할>
 -정성은 : 헤더파일 및 CRUD함수 구현하기
 -전혜원 : 메인파일 과 파일저장기능/파일, 다운여부함수만들기
+
+<div align="center">
 <img src=https://user-images.githubusercontent.com/130717706/236789244-a2f91c35-8ebc-4366-a669-c0a366d3da09.png>
 
