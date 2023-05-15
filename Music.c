@@ -1,4 +1,18 @@
 int selectMenu(){
+   int menu;
+   printf("***** 플레이리스트 메뉴 *****\n");
+   printf("0. 종료\n");
+   printf("1. 데이터파일저장\n");
+   printf("2. 노래 검색\n");
+   printf("3. 노래 추가\n");
+   printf("4. 노래 삭제\n");
+   printf("5. 노래 수정\n");
+   printf("6. 노래 다운로드\n");
+   printf("7. 노래 듣기\n");
+   printf("원하는 메뉴는 ==>");
+   scanf("%d", &menu);
+    
+   return menu;
 }
 
 void readMusic(Music m){
