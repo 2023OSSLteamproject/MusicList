@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Music.h"
 
 int main(void){
   int size = 20;
@@ -18,12 +21,15 @@ while (1)
      break; 
     }
   else if (menu == 1 && count > 0) {
-  listScore(s, count); }
+  listScore(s, count); 
+  }
+  
   else if (menu == 2 && count < size)
   {
   s[count] = (Score *)malloc(sizeof(Score)); // 동적 메모리 할당 addScore(s[count]);
   count++;
   }
+  
   else if (menu == 3 && count > 0) {
   listScore(s, count);
   num = selectNum();
@@ -33,22 +39,25 @@ while (1)
   else
   {
   printf("잘못된 번호입니다.\n");
-  } 
+    } 
   }
+  
   else if (menu == 4 && count > 0) {
   listScore(s, count);
   num = selectNum();
-  if (num > 0 && num <= count) {
-  deleteScore(s, count, num);
+    if (num > 0 && num <= count) {
+    deleteScore(s, count, num);
+    }
+    else
+    {
+    printf("잘못된 번호입니다.\n");
+    } 
   }
-  else
-  {
-  printf("잘못된 번호입니다.\n");
-  } 
-  }
+  
   else if (menu == 5 && count > 0) {
   saveData(s, count); 
   }
+  
   else if (menu == 6 && count > 0){
   searchName(s, count);
   } 
