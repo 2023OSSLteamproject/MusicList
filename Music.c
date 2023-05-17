@@ -1,4 +1,4 @@
-int selectMenu(){
+int selectMenu(){ //메뉴를 선택하기 위해 메뉴를 보여주는 함수 
    int menu;
    printf("***** 플레이리스트 메뉴 *****\n");
    printf("0. 종료\n");
@@ -39,7 +39,7 @@ void listenMusic(Music *m[], int count){
 void searchMusic(Music *m[], int count){
 }
 
-void saveData(Music *m[], int count){
+void saveData(Music *m[], int count){ //추가했던 데이터를 txt파일에 저장하는 함수
     FILE *fp;
     fp = fopen("list.txt", "wt");
     for (int i = 0; i < count; i++)
@@ -50,7 +50,7 @@ void saveData(Music *m[], int count){
     printf("=> 저장완료!\n");
 }
 
-int loadData(Music *m[]){
+int loadData(Music *m[]){ //저장된 데이터를 불러오는 함수 
     int i = 0;
     FILE *fp;
     fp = fopen("list.txt", "rt"); 
