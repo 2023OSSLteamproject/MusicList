@@ -5,7 +5,7 @@ typedef struct{
 char title[20];
 char name[20];
 int number;
-char Down;
+char down;
 char memo[40];
 }Music;
 int selectMenu(); //처음에 메뉴를 선택할 수 있게 보여주는 함수
