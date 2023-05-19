@@ -5,11 +5,9 @@
 
 int main(void)
 {
-
-    int size = 20;
     Music *m[20];
-    int count = 0, menu, num;
-    int del, index = 0;
+    int size = 20;
+    int count = 0, menu, index = 0;
 
     count = loadData(m);
     index = count;
@@ -31,48 +29,36 @@ int main(void)
             searchMusic(m, count);
         }
 
-        else if (menu == 3 && count > 0)
+        else if (menu == 3)
         {
-            m[count] = (Music *)malloc(sizeof(Music)); // 동적 메모리 할당 addScore(s[count]);
-            addMusic(m[count]);
+            m[count] = (Music *)malloc(sizeof(Music));
+            addMusic(m,count);
             count++;
         }
 
-        else if (menu == 4 && count > 0)
+        else if (menu == 4 )
         {
-            listMusic(m, count);
-            num = selectNum();
-            if (num > 0 && num <= count)
-            {
-                deleteMusic(m, count);
-            }
-            else
-            {
-                printf("잘못된 번호입니다.\n");
-            }
+            readMusic(m, count);
+            deleteMusic(m);
         }
 
-        else if (menu == 5 && count > 0)
+        else if (menu == 5 )
         {
-            listMusic(m, count);
-            num = selectNum();
-            if (num > 0 && num <= count)
-            {
-                updateMusic(m[num - 1]);
-            }
-            else
-            {
-                printf("잘못된 번호입니다.\n");
-            }
+            readMusic(m, count);
+            updateMusic(m);
         }
 
-        else if (menu == 6 && count > 0)
+        else if (menu == 6 )
         {
             downMusic(m, count);
         }
-        else if (menu == 7 && count > 0)
+        else if (menu == 7 )
         {
             listenMusic(m, count);
+        }
+        if (menu == 8 )
+        {
+            readMusic(m, count);
         }
     }
     // 동적 메모리 해제
