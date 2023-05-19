@@ -1,3 +1,8 @@
+#include "Music.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 int selectMenu(){ //메뉴를 선택하기 위해 메뉴를 보여주는 함수 
    int menu;
    printf("***** 플레이리스트 메뉴 *****\n");
@@ -44,7 +49,7 @@ void saveData(Music *m[], int count){ //추가했던 데이터를 txt파일에 �
     fp = fopen("list.txt", "wt");
     for (int i = 0; i < count; i++)
     {
-        fprintf(fp, "%d %s  %s   %d   %s %s", i + 1, p[i]->title, p[i]->name, &p[i]->number, p[i]->down, p[i]->memo );
+        fprintf(fp, "%d %s  %s   %d   %s %s", i + 1, m[i]->title, m[i]->name, &m[i]->number, m[i]->down, m[i]->memo );
     }
     fclose(fp);
     printf("=> 저장완료!\n");
@@ -59,13 +64,13 @@ int loadData(Music *m[]){ //저장된 데이터를 불러오는 함수
     return 0; 
     }
 for (i = 0; i < 100; i++) {
-    m[i] = (Music *)malloc(sizeof(Score)); 
+    m[i] = (Music *)malloc(sizeof(Music)); 
     if (feof(fp)) break;
-    fscanf(fp,"%s", s[i]->title);
-    fscanf(fp,"%s", s[i]->name);
-    fscanf(fp,"%d", &s[i]->number);
-    fscanf(fp,"%s", s[i]->down);
-    fscanf(fp,"%s", s[i]->memo);
+    fscanf(fp,"%s", m[i]->title);
+    fscanf(fp,"%s", m[i]->name);
+    fscanf(fp,"%d", &m[i]->number);
+    fscanf(fp,"%s", m[i]->down);
+    fscanf(fp,"%s", m[i]->memo);
 }
 printf("=> 로딩 성공!\n");
     
