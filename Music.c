@@ -3,78 +3,162 @@
 #include <stdlib.h>
 #include <string.h>
 
-int selectMenu(){ //메뉴를 선택하기 위해 메뉴를 보여주는 함수 
-   int menu;
-   printf("***** 플레이리스트 메뉴 *****\n");
-   printf("0. 종료\n");
-   printf("1. 데이터파일저장\n");
-   printf("2. 노래 검색\n");
-   printf("3. 노래 추가\n");
-   printf("4. 노래 삭제\n");
-   printf("5. 노래 수정\n");
-   printf("6. 노래 다운로드\n");
-   printf("7. 노래 듣기\n");
-   printf("원하는 메뉴는 ==>");
-   scanf("%d", &menu);
-    
-   return menu;
+int selectMenu()
+{ // 메뉴를 선택하기 위해 메뉴를 보여주는 함수
+    int menu;
+    printf("***** 플레이리스트 메뉴 *****\n");
+    printf("0. 종료\n");
+    printf("1. 데이터파일저장\n");
+    printf("2. 노래 검색\n");
+    printf("3. 노래 추가\n");
+    printf("4. 노래 삭제\n");
+    printf("5. 노래 수정\n");
+    printf("6. 노래 다운로드\n");
+    printf("7. 노래 듣기\n");
+    printf("8. 조회\n");
+    printf("원하는 메뉴는 ==>");
+    scanf("%d", &menu);
+
+    return menu;
 }
 
-void readMusic(Music m){
+void listMusic(Music m)
+{
+    printf("    %s   %s   %3d회   %6c  %15s\n", m.title, m.name, m.number, m.down, m.memo);
 }
 
-int addMusic(Music *m){
+void readMusic(Music *m[], int count)
+{
+    printf("**************************\n NO  제목   가수명   재생횟수  다운여부    메모\n");
+    for (int i = 0; i < count; i++)
+    {
+        if (m[i]->number < 0)
+            continue;
+        printf("%2d", i + 1);
+        listMusic(*m[i]);
+    }
+    if (count <= 0)
+        printf("조회할 데이터가 없습니다.\n");
+    printf("\n");
 }
 
-void listMusic(Music *m[], int count){
+int addMusic(Music *m[], int count)
+{
+
+    printf("노래제목은? ");
+    scanf("%s", m[count]->title);
+    printf("가수명은? ");
+    scanf("%s", m[count]->name);
+    printf("현재 재생횟수는? ");
+    scanf("%d", &m[count]->number);
+    printf("다운여부는?[Y/N] ");
+    scanf(" %c", &m[count]->down); // %c 앞에 공백 추가
+    printf("간단한메모(띄어쓰기금지) ");
+    scanf("%s", m[count]->memo);
+
+    return count + 1;
 }
 
-void deleteMusic(Music *m[], int count){
+int deleteMusic(Music *m[])
+{ // 삭제할데이터없으면 없다고 뜨게 만들기
+    int index;
+    printf("\n삭제할 메뉴 번호는? ");
+    scanf("%d", &index);
+    m[index - 1]->number = -1;
+    printf("=> 삭제됨!\n");
+    return 1;
 }
 
-void updateMusic(Music *m){
+int updateMusic(Music *m[])
+{
+    int index;
+    printf("\n 수정할 노래 번호는? ");
+    scanf("%d", &index);
+    getchar();
+    printf("변경할 노래제목은? ");
+    fgets(m[index - 1]->title, 40, stdin);
+    m[index - 1]->title[strcspn(m[index - 1]->title, "\n")] = '\0';
+    printf("변경할 가수이름은? ");
+    scanf("%s", m[index - 1]->name);
+    printf("변경할 노래횟수는? ");
+    scanf("%d", &m[index - 1]->number);
+    printf("변경할 다운여부는? ");
+    scanf("%c", &m[index - 1]->down);
+    printf("변경할 메모는? ");
+    scanf("%s", m[index - 1]->memo);
+    getchar();
+
+    printf("=> 수정성공!\n");
+
+    return 1;
 }
 
-void downMusic(Music *m[], int count){
+void downMusic(Music *m[], int count)
+{
 }
 
-void listenMusic(Music *m[], int count){
+void listenMusic(Music *m[], int count)
+{
 }
 
-void searchMusic(Music *m[], int count){
+void searchMusic(Music *m[], int count)
+{
+    int scnt = 0;
+    char search[20];
+    printf("\n검색할 노래제목은 ? ");
+    scanf("%s", search);
+    printf("*****************\n");
+    for (int i = 0; i < count; i++)
+    {
+        if (m[i]->number == -1)
+            continue;
+        if (strstr(m[i]->title, search))
+        {
+            printf("%2d ", i + 1);
+            listMusic(*m[i]);
+            scnt++;
+        }
+    }
+    if (scnt == 0)
+        printf("=> 검색된 데이터 없음!");
+    printf("\n");
 }
 
-void saveData(Music *m[], int count){ //추가했던 데이터를 txt파일에 저장하는 함수
+void saveData(Music *m[], int count)
+{ // 추가했던 데이터를 txt파일에 저장하는 함수
     FILE *fp;
     fp = fopen("list.txt", "wt");
     for (int i = 0; i < count; i++)
     {
-        fprintf(fp, "%d %s  %s   %d   %s %s", i + 1, m[i]->title, m[i]->name, &m[i]->number, m[i]->down, m[i]->memo );
+        fprintf(fp, "%d %s  %s   %d   %c %s", i + 1, m[i]->title, m[i]->name,
+                m[i]->number, m[i]->down, m[i]->memo);
     }
     fclose(fp);
     printf("=> 저장완료!\n");
 }
 
-int loadData(Music *m[]){ //저장된 데이터를 불러오는 함수 
-    int i = 0;
+int loadData(Music *m[])
+{
     FILE *fp;
-    fp = fopen("list.txt", "rt"); 
-    if (fp == NULL) {
-    printf("=> 파일 없음\n");
-    return 0; 
+    int i = 0;
+    fp = fopen("list.txt", "rt");
+    if (fp == NULL)
+    {
+        printf("=> 파일 없음\n");
+        return 0;
     }
-for (i = 0; i < 100; i++) {
-    m[i] = (Music *)malloc(sizeof(Music)); 
-    if (feof(fp)) break;
-    fscanf(fp,"%s", m[i]->title);
-    fscanf(fp,"%s", m[i]->name);
-    fscanf(fp,"%d", &m[i]->number);
-    fscanf(fp,"%s", m[i]->down);
-    fscanf(fp,"%s", m[i]->memo);
-}
-printf("=> 로딩 성공!\n");
-    
-fclose(fp);
-    
-return i;
+    while (i < 20)
+    {
+        m[i] = (Music *)malloc(sizeof(Music));
+        if (fscanf(fp, "%s", m[i]->title) == EOF)
+            break;
+        fscanf(fp, "%s", m[i]->name);
+        fscanf(fp, "%d", &(m[i]->number));
+        fscanf(fp, " %c", &(m[i]->down));
+        fscanf(fp, "%s", m[i]->memo);
+        i++;
+    }
+    fclose(fp);
+    printf("=> 로딩 성공!\n");
+    return i;
 }
