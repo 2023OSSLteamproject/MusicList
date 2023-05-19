@@ -6,6 +6,7 @@
 int selectMenu()
 { // 메뉴를 선택하기 위해 메뉴를 보여주는 함수
     int menu;
+
     printf("\n***** 플레이리스트 메뉴 *****\n");
     printf("0. 종료\n");
     printf("1. 데이터파일저장\n");
@@ -15,7 +16,7 @@ int selectMenu()
     printf("5. 노래 수정\n");
     printf("6. 노래 다운로드\n");
     printf("7. 노래 듣기\n");
-    printf("8. 조회\n");
+    printf("8. 리스트 조회\n");
     printf("원하는 메뉴는 ==>");
     scanf("%d", &menu);
 
