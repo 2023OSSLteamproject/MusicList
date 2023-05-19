@@ -6,7 +6,7 @@
 int selectMenu()
 { // 메뉴를 선택하기 위해 메뉴를 보여주는 함수
     int menu;
-    printf("***** 플레이리스트 메뉴 *****\n");
+    printf("\n***** 플레이리스트 메뉴 *****\n");
     printf("0. 종료\n");
     printf("1. 데이터파일저장\n");
     printf("2. 노래 검색\n");
@@ -24,7 +24,7 @@ int selectMenu()
 
 void listMusic(Music m)
 {
-    printf("    %s   %s   %3d회   %6c  %15s\n", m.title, m.name, m.number, m.down, m.memo);
+    printf("    %s   %3s   %6d   %6c  %9s\n", m.title, m.name, m.number, m.down, m.memo);
 }
 
 void readMusic(Music *m[], int count)
@@ -65,7 +65,7 @@ int deleteMusic(Music *m[])
     printf("\n삭제할 메뉴 번호는? ");
     scanf("%d", &index);
     m[index - 1]->number = -1;
-    printf("=> 삭제됨!\n");
+    printf("=> 삭제됨!\n\n");
     return 1;
 }
 
@@ -84,11 +84,12 @@ int updateMusic(Music *m[])
     scanf("%d", &m[index - 1]->number);
     printf("변경할 다운여부는? ");
     scanf("%c", &m[index - 1]->down);
+    getchar();
     printf("변경할 메모는? ");
     scanf("%s", m[index - 1]->memo);
     getchar();
 
-    printf("=> 수정성공!\n");
+    printf("=> 수정성공!\n\n");
 
     return 1;
 }
@@ -120,7 +121,7 @@ void searchMusic(Music *m[], int count)
         }
     }
     if (scnt == 0)
-        printf("=> 검색된 데이터 없음!");
+        printf("=> 검색된 데이터 없음!\n");
     printf("\n");
 }
 
@@ -130,11 +131,12 @@ void saveData(Music *m[], int count)
     fp = fopen("list.txt", "wt");
     for (int i = 0; i < count; i++)
     {
-        fprintf(fp, "%d %s  %s   %d   %c %s", i + 1, m[i]->title, m[i]->name,
+        if(m[i]->number >= 0)
+        fprintf(fp, "%s  %s   %d   %c %s",  m[i]->title, m[i]->name,
                 m[i]->number, m[i]->down, m[i]->memo);
     }
     fclose(fp);
-    printf("=> 저장완료!\n");
+    printf("=> 저장완료!\n\n");
 }
 
 int loadData(Music *m[])
