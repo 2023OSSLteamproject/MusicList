@@ -39,7 +39,7 @@ int main(void)
         else if (menu == 4 )
         {
             readMusic(m, count);
-            deleteMusic(m);
+            deleteMusic(m,count);
         }
 
         else if (menu == 5 )
