@@ -16,7 +16,7 @@ int selectMenu()
     printf("5. 노래 수정\n");
     printf("6. 노래 다운로드\n");
     printf("7. 노래 듣기\n");
-    printf("8. 리스트 조회\n");
+    printf("8. 리스트 조회하기\n");
     printf("원하는 메뉴는 ==>");
     scanf("%d", &menu);
 
