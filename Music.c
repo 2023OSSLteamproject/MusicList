@@ -97,11 +97,40 @@ int updateMusic(Music *m[])
 
 void downMusic(Music *m[], int count)
 {
+    int index;
+    printf("\n다운로드할 노래 번호를 선택하세요: ");
+    scanf("%d", &index);
+    getchar();
+
+    if (index >= 1 && index <= count)
+    {
+        m[index - 1]->down = 'Y';
+        printf("다운로드 하였습니다.\n\n");
+    }
+    else
+    {
+        printf("유효하지 않은 노래 번호입니다.\n\n");
+    }
 }
 
 void listenMusic(Music *m[], int count)
 {
+    int index;
+    printf("\n들을 노래 번호를 선택하세요: ");
+    scanf("%d", &index);
+    getchar();
+
+    if (index >= 1 && index <= count)
+    {
+        m[index - 1]->number++;
+        printf("=> 들은 횟수: %d회\n\n", m[index - 1]->number);
+    }
+    else
+    {
+        printf("유효하지 않은 노래 번호입니다.\n\n");
+    }
 }
+
 
 void searchMusic(Music *m[], int count)
 {
