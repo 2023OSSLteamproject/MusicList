@@ -60,14 +60,23 @@ int addMusic(Music *m[], int count)
     return count + 1;
 }
 
-int deleteMusic(Music *m[])
-{ // 삭제할데이터없으면 없다고 뜨게 만들기
+int deleteMusic(Music *m[], int count)
+{
     int index;
     printf("\n삭제할 메뉴 번호는? ");
     scanf("%d", &index);
-    m[index - 1]->number = -1;
-    printf("=> 삭제됨!\n\n");
-    return 1;
+    if (index >= 1 && index <= count)
+    {
+        m[index - 1]->number = -1;
+        printf("=> 삭제됨!\n\n");
+        return 1;
+    }
+    else
+    {
+        printf("삭제할 데이터가 없습니다.\n\n");
+        return 0;
+    }
+}
 }
 
 int updateMusic(Music *m[])
