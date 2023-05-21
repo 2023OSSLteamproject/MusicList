@@ -77,7 +77,7 @@ int deleteMusic(Music *m[], int count)
         return 0;
     }
 }
-}
+
 
 int updateMusic(Music *m[])
 {
@@ -92,10 +92,10 @@ int updateMusic(Music *m[])
     scanf("%s", m[index - 1]->name);
     printf("변경할 노래횟수는? ");
     scanf("%d", &m[index - 1]->number);
-    printf("변경할 다운여부는? ");
-    scanf("%c", &m[index - 1]->down);
+    printf("변경할 다운여부는?[Y/N] ");
+    scanf(" %c", &m[index - 1]->down);
     getchar();
-    printf("변경할 메모는? ");
+    printf("변경할 메모는?(띄어쓰기금지) ");
     scanf("%s", m[index - 1]->memo);
     getchar();
 
@@ -132,7 +132,7 @@ void listenMusic(Music *m[], int count)
     if (index >= 1 && index <= count)
     {
         m[index - 1]->number++;
-        printf("=> 들은 횟수: %d회\n\n", m[index - 1]->number);
+        printf("=>지금까지 들은 재생횟수: %d회\n\n", m[index - 1]->number);
     }
     else
     {
@@ -171,7 +171,7 @@ void saveData(Music *m[], int count)
     for (int i = 0; i < count; i++)
     {
         if(m[i]->number >= 0)
-        fprintf(fp, "%s  %s   %d   %c %s",  m[i]->title, m[i]->name,
+        fprintf(fp, "%s  %s   %d   %c %s\n",  m[i]->title, m[i]->name,
                 m[i]->number, m[i]->down, m[i]->memo);
     }
     fclose(fp);
