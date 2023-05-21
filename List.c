@@ -42,7 +42,7 @@ int main(void)
             deleteMusic(m,count);
         }
 
-        else if (menu == 5 )
+        else if (menu == 5)
         {
             readMusic(m, count);
             updateMusic(m);
@@ -50,10 +50,12 @@ int main(void)
 
         else if (menu == 6 )
         {
+            readMusic(m, count);
             downMusic(m, count);
         }
         else if (menu == 7 )
         {
+            readMusic(m, count);
             listenMusic(m, count);
         }
         if (menu == 8 )
